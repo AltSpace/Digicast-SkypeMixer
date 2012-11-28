@@ -1,0 +1,81 @@
+<TodoMap>
+<TodoModules>
+<Osc>
+<Input AutoStart="False" Port="6666" />
+<Output AutoStart="False" Port="7777" />
+</Osc>
+<Midi>
+<Inputs>
+<Input AutoStart="Akai APC20" />
+</Inputs>
+<Outputs>
+<Output AutoStart="Akai APC20" />
+</Outputs>
+</Midi>
+</TodoModules>
+<TodoVariables>
+<TodoVariable>
+<Name>Clip1</Name>
+<Category>Global</Category>
+<AllowFeedBack>True</AllowFeedBack>
+<TakeOverMode>Immediate</TakeOverMode>
+<Default>0</Default>
+<MinValue>0</MinValue>
+<MaxValue>1</MaxValue>
+<TweenMode>Linear</TweenMode>
+<EaseMode>In</EaseMode>
+<TodoInputs>
+<TodoInput Type="Midi">
+<Channel>0</Channel>
+<ControlType>Note</ControlType>
+<ControlValue>53</ControlValue>
+<Device>Any</Device>
+<TakeOverMode>Parent</TakeOverMode>
+<FeedbackMode>Parent</FeedbackMode>
+</TodoInput>
+</TodoInputs>
+</TodoVariable>
+<TodoVariable>
+<Name>Clip2</Name>
+<Category>Global</Category>
+<AllowFeedBack>True</AllowFeedBack>
+<TakeOverMode>Immediate</TakeOverMode>
+<Default>0</Default>
+<MinValue>0</MinValue>
+<MaxValue>1</MaxValue>
+<TweenMode>Linear</TweenMode>
+<EaseMode>In</EaseMode>
+<TodoInputs>
+<TodoInput Type="Midi">
+<Channel>1</Channel>
+<ControlType>Note</ControlType>
+<ControlValue>53</ControlValue>
+<Device>Any</Device>
+<TakeOverMode>Parent</TakeOverMode>
+<FeedbackMode>Parent</FeedbackMode>
+</TodoInput>
+</TodoInputs>
+</TodoVariable>
+<TodoVariable>
+<Name>Clip3</Name>
+<Category>Global</Category>
+<AllowFeedBack>True</AllowFeedBack>
+<TakeOverMode>Immediate</TakeOverMode>
+<Default>0</Default>
+<MinValue>0</MinValue>
+<MaxValue>1</MaxValue>
+<TweenMode>Linear</TweenMode>
+<EaseMode>In</EaseMode>
+<TodoInputs>
+<TodoInput Type="Midi">
+<Channel>2</Channel>
+<ControlType>Note</ControlType>
+<ControlValue>53</ControlValue>
+<Device>Any</Device>
+<TakeOverMode>Parent</TakeOverMode>
+<FeedbackMode>Parent</FeedbackMode>
+</TodoInput>
+</TodoInputs>
+</TodoVariable>
+</TodoVariables>
+</TodoMap>
