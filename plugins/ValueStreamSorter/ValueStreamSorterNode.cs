@@ -24,18 +24,24 @@ namespace VVVV.Nodes
 		
 		[Input ("Element Width")]
 		ISpread<double> FElementWidthIn;
+		
+		[Input ("Space", IsSingle = true)]
+		ISpread<double> FSpaceIn;
 
-		[Output("FStreamX")]
+		[Output("StreamX")]
 		ISpread<double> FStreamXOut;
 		
 		[Output("FElementVisible")]
 		ISpread<bool> FStreamVisibleOut;
+		
+		[Output("CenterX")]
+		ISpread<double> FCenterXOut;
 
 		[Import()]
 		ILogger FLogger;
 		#endregion fields & pins
 		
-		List<double> FStackID = new List<double>();
+		List<int> FStackID = new List<int>();
 
 		//called when data for any output pin is requested
 		public void Evaluate(int SpreadMax)
@@ -57,27 +63,41 @@ namespace VVVV.Nodes
 						FStackID.RemoveAt(FStackID.IndexOf(i));
 					}
 				}
+			}
+			
+			//Checking visibility
+			for (int i = 0; i < SpreadMax; i++)
+			{
+				int index = FStackID.IndexOf(i);
 				
-				//Sorting output
-				for (int i = 0; i < SpreadMax; i++)
+				if(index < 0)
 				{
-					int index = FStackID.IndexOf(i);
-					
-					if(index < 0)
-					{
-						FStreamVisibleOut[i] = false;
-						FStreamXOut[i] = 0;
-						continue;
-					}
-					
-					FStreamVisibleOut[i] = true;
-					double res = (FStackID.Count * FElementWidthIn[0]) / 2;
-					FLogger.Log(LogType.Debug, res.ToString());
-					FLogger.Log(LogType.Debug, "!!!!!");
-					FStreamXOut[i] = index * FElementWidthIn[0] - (((FStackID.Count * FElementWidthIn[0]) / 2) - FElementWidthIn[0] / 2);
+					FStreamVisibleOut[i] = false;
+					FStreamXOut[i] = 0;
+					continue;
 				}
 				
+				FStreamVisibleOut[i] = true;
+				//FStreamXOut[i] = index * FElementWidthIn[0] - (((FStackID.Count * FElementWidthIn[0]) / 2) - FElementWidthIn[0] / 2);
 			}
+			
+			//Sorting
+			double prevX = 0;
+			for (int i = 0; i < FStackID.Count; i++)
+			{
+				int slice = FStackID[i];
+
+				double space = FSpaceIn[0];
+				if(i==0) space = 0;
+				
+				double move = space + FElementWidthIn[slice] / 2;
+				FStreamXOut[slice] = prevX + move;
+				
+				prevX += space + FElementWidthIn[slice];
+			}
+			
+			//Center
+			FCenterXOut[0] = -prevX / 2;
 		}
 	}
 }
